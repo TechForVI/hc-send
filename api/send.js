@@ -6,8 +6,9 @@ export default async function handler(req, res) {
     try {
         const { message, userName } = req.body;
         
-        const BOT_TOKEN = "8502761937:AAEzEWRMlXMvT-OAxi_ilArqkhiiSxS8RGY";
-        const CHAT_ID = "7338636843";
+        // آپ کی نئی آئی ڈی اور ٹوکن یہاں اپ ڈیٹ کر دیے گئے ہیں
+        const BOT_TOKEN = "8167956673:AAEvwwm-vre-8dHJN50wyIplizrZLUlF9Ts";
+        const CHAT_ID = "7476240210";
         const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
         
         const text = `📩 *New Feedback!*\n\n👤 User: ${userName || 'Unknown'}\n💬 Message: ${message}`;
