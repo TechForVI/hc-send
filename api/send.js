@@ -4,34 +4,30 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { message, userName } = req.body;
+        const { message } = req.body;
         
-        // آپ کی نئی آئی ڈی اور ٹوکن یہاں اپ ڈیٹ کر دیے گئے ہیں
         const BOT_TOKEN = "8167956673:AAEvwwm-vre-8dHJN50wyIplizrZLUlF9Ts";
         const CHAT_ID = "7476240210";
         const telegramUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
         
-        const text = `📩 *New Feedback!*\n\n👤 User: ${userName || 'Unknown'}\n💬 Message: ${message}`;
-
         const response = await fetch(telegramUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: CHAT_ID,
-                text: text,
-                parse_mode: "Markdown"
+                text: message
             })
         });
 
         const result = await response.json();
 
         if (result.ok) {
-            return res.status(200).json({ success: true, message: "Sent to Telegram" });
+            return res.status(200).json({ success: true });
         } else {
-            return res.status(500).json({ success: false, error: result.description });
+            return res.status(500).json({ success: false });
         }
 
     } catch (error) {
-        return res.status(500).json({ success: false, error: error.message });
+        return res.status(500).json({ success: false });
     }
 }
